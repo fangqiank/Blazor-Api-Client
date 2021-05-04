@@ -1,0 +1,46 @@
+﻿@page "/launches"
+
+@inject ISpaceXDataService Service
+
+<h3>SpaceX Launches</h3>
+
+@if (launches == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Is tentative?</th>
+            <th>Launch date</th>
+            <th>Mission name</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var launch in launches)
+        {
+            <tr>
+                <td>@launch.Id</td>
+                <td>@launch.IsTentative</td>
+                <td>@launch.LaunchDateLocal</td>
+                <td>@launch.MissionName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+@code {
+    private LaunchDto[] launches;
+
+    protected override async Task OnInitializedAsync()
+    {
+        launches = await Service.GetAllLaunches();
+    }
+
+}
+
+

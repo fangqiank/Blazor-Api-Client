@@ -1,0 +1,38 @@
+﻿@page "/fetchdata"
+
+
+
+<h1>Spacex Launches</h1>
+
+<p>This is launch data pulled back through REST API.</p>
+
+@if (_launches == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Is tentative?</th>
+                <th>Launch date</th>
+                <th>Mission name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var launch in _launches)
+            {
+                <tr>
+                    <td>@launch.Id</td>
+                    <td>@launch.IsTentative</td>
+                    <td>@launch.LaunchDateLocal</td>
+                    <td>@launch.MissionName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
